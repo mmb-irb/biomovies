@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', async(event) => {
     document.getElementById("year").innerHTML = new Date().getFullYear();
 
     let latest_version
-    fetch('https://api.github.com/repos/gbayarri/biomovies-app/releases')
+    fetch('https://api.github.com/repos/mmb-irb/biomovies-app/releases?per_page=100')
     .then(res => res.json())
     .then(json => {
 
@@ -85,11 +85,6 @@ window.addEventListener('DOMContentLoaded', async(event) => {
                 document.getElementById("arm64-dmg").classList.remove("disabled")
                 document.getElementById("arm64-dmg").setAttribute('href', item.browser_download_url);
             }
-            if(item.name.indexOf('dmg') !== -1 && item.name.indexOf('arm64') === -1) {
-                document.getElementById("dropdownMenuButtonApple").classList.remove("disabled")
-                document.getElementById("intel-dmg").classList.remove("disabled")
-                document.getElementById("intel-dmg").setAttribute('href', item.browser_download_url);
-            }
             if(item.name.indexOf('exe') !== -1) {
                 document.getElementById("dropdownMenuButtonWin").classList.remove("disabled")
                 document.getElementById("exe").classList.remove("disabled")
@@ -99,11 +94,6 @@ window.addEventListener('DOMContentLoaded', async(event) => {
                 document.getElementById("dropdownMenuButtonUbuntu").classList.remove("disabled")
                 document.getElementById("amd64-deb").classList.remove("disabled")
                 document.getElementById("amd64-deb").setAttribute('href', item.browser_download_url);
-            }
-            if(item.name.indexOf('AppImage') !== -1) {
-                document.getElementById("dropdownMenuButtonUbuntu").classList.remove("disabled")
-                document.getElementById("amd64-appimage").classList.remove("disabled")
-                document.getElementById("amd64-appimage").setAttribute('href', item.browser_download_url);
             }
         })
 
@@ -127,10 +117,8 @@ window.addEventListener('DOMContentLoaded', async(event) => {
         selectReleases.addEventListener("change", (e) => {
             // disable all secondary buttons
             document.getElementById("arm64-dmg-sec").classList.add("disabled")
-            document.getElementById("intel-dmg-sec").classList.add("disabled")
             document.getElementById("exe-sec").classList.add("disabled")
             document.getElementById("amd64-deb-sec").classList.add("disabled")
-            document.getElementById("amd64-appimage-sec").classList.add("disabled")
             document.getElementById("dropdownMenuButtonAppleSec").classList.add("disabled")
             document.getElementById("dropdownMenuButtonUbuntuSec").classList.add("disabled")
             document.getElementById("dropdownMenuButtonWinSec").classList.add("disabled")
@@ -144,11 +132,6 @@ window.addEventListener('DOMContentLoaded', async(event) => {
                         document.getElementById("arm64-dmg-sec").classList.remove("disabled")
                         document.getElementById("arm64-dmg-sec").setAttribute('href', item.browser_download_url);
                     }
-                    if(item.name.indexOf('dmg') !== -1 && item.name.indexOf('arm64') === -1) {
-                        document.getElementById("dropdownMenuButtonAppleSec").classList.remove("disabled")
-                        document.getElementById("intel-dmg-sec").classList.remove("disabled")
-                        document.getElementById("intel-dmg-sec").setAttribute('href', item.browser_download_url);
-                    }
                     if(item.name.indexOf('exe') !== -1) {
                         document.getElementById("dropdownMenuButtonWinSec").classList.remove("disabled")
                         document.getElementById("exe-sec").classList.remove("disabled")
@@ -158,11 +141,6 @@ window.addEventListener('DOMContentLoaded', async(event) => {
                         document.getElementById("dropdownMenuButtonUbuntuSec").classList.remove("disabled")
                         document.getElementById("amd64-deb-sec").classList.remove("disabled")
                         document.getElementById("amd64-deb-sec").setAttribute('href', item.browser_download_url);
-                    }
-                    if(item.name.indexOf('AppImage') !== -1) {
-                        document.getElementById("dropdownMenuButtonUbuntuSec").classList.remove("disabled")
-                        document.getElementById("amd64-appimage-sec").classList.remove("disabled")
-                        document.getElementById("amd64-appimage-sec").setAttribute('href', item.browser_download_url);
                     }
                 })
             } else document.getElementById("sec-assets").style.display = "none"
