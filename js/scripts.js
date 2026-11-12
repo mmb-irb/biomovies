@@ -9,6 +9,26 @@
 
 window.addEventListener('DOMContentLoaded', async(event) => {
 
+    // the videos of the modals: a poster until clicked, then the YouTube player at the modal's width (it plays at once);
+    // taken out when the modal closes, which stops it
+    document.querySelectorAll('.yt-facade').forEach(function (facade) {
+        facade.addEventListener('click', function () {
+            const frame = document.createElement('iframe')
+            frame.className = 'yt-container'
+            frame.src = 'https://www.youtube.com/embed/' + facade.dataset.yt + '?autoplay=1&rel=0&playsinline=1'
+            frame.title = 'YouTube video player'
+            frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            frame.allowFullscreen = true
+            facade.hidden = true
+            facade.after(frame)
+        })
+        const modal = facade.closest('.modal')
+        if (modal) modal.addEventListener('hidden.bs.modal', function () {
+            modal.querySelectorAll('iframe.yt-container').forEach(function (frame) { frame.remove() })
+            facade.hidden = false
+        })
+    })
+
     // Navbar shrink function
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
